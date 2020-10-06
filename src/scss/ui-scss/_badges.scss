@@ -1,0 +1,18 @@
+@each $name, $value in $colorMap {
+  $bgColor: nth($value, 1);
+  $fontColor: nth($value, 2);
+
+  .badge-#{$name} {
+    font-weight: normal;
+    color: $fontColor;
+    border-color: $bgColor;
+    background-color: $bgColor;
+    padding: 0.4rem 0.6rem;
+    &:hover {
+      background-color: darken($bgColor, 10%);
+    }
+    &.active {
+      background-color: lighten($bgColor, 10%);
+    }
+  }
+}

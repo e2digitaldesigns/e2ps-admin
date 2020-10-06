@@ -1,0 +1,48 @@
+$invoicePadding: 0.375rem;
+$invoiceSectionOneSize: 9rem;
+$separationHeight: 2rem;
+$customerInfoHeight: $separationHeight * 5;
+
+@mixin listSizing() {
+  height: $separationHeight;
+  @include defaultBorder('bottom');
+  padding: $invoicePadding;
+  &:last-child {
+    border: none;
+  }
+}
+
+.invoice-holder,
+.invoice-item-holder {
+  font-size: 0.875rem;
+  display: grid;
+  grid-template-columns: $invoiceSectionOneSize 5fr 4fr;
+  @include defaultBorder('bottom');
+  &.no-btm-border {
+    border-bottom: 0;
+  }
+}
+
+.invoice-list-ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    @include listSizing();
+    &.normalize {
+    }
+  }
+
+  &.normalize li {
+    height: auto;
+    min-height: $separationHeight;
+    &.default {
+      height: $separationHeight;
+    }
+  }
+}
+
+@import './order-management-invoice';
+@import './order-management-invoice-item';
+@import './order-management-images';

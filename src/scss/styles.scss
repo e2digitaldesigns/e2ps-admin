@@ -1,0 +1,48 @@
+//UI
+@import './ui-scss/color-theme';
+
+@import './fonts';
+@import './global-assets';
+@import './global-mixins';
+
+// Override default variables before the import
+$body-bg: $primaryBackgroundColor;
+
+$theme-colors: (
+  'primary': $primaryColor,
+);
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.clear-fix {
+  height: 0;
+  line-height: 0;
+  clear: both;
+}
+
+//ANIMATIONS
+@import './animations/animations';
+
+//TEMPLATE
+@import './template-scss/template-theme';
+@import './template-scss/simplebar';
+@import './template-scss/template-header';
+@import './template-scss/template-sidebar-left';
+@import './template-scss/template-main-content';
+
+//MODULES
+@import './orderManagement/order-management';
+@import './productManagement/product-management';

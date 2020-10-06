@@ -1,0 +1,120 @@
+$statusColorOnline: #00b777;
+$statusColorOffline: #e65a5a;
+
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+$colorMode: light;
+$primaryColor: #6a059d;
+$primaryColorAccent: #fff;
+$secondaryColor: #fff;
+$tertiaryColor: #000;
+
+$primaryFontColor: #404040;
+$secondaryFontColor: #fff;
+$primaryBackgroundColor: #eee;
+$primaryBorderColor: darken($primaryBackgroundColor, 3%); //#e6e6e6
+
+//Header Nav
+$headerNavBgColor: lighten($primaryBackgroundColor, 3.9%); //#f8f8f8
+$headerNavLiBgColor: lighten($primaryBackgroundColor, 0.5%); //#efefef
+
+//Menu
+$menuBackgroundColor: whitesmoke;
+
+//Tool Tip
+$fontColorToolTip: #fff;
+$bgColorToolTip: #000;
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+// $colorMode: dark;
+@if $colorMode == dark {
+  $primaryColor: lighten(#107c10, 0%);
+  // $primaryColor: lighten(#6a059d, 20%);
+  $primaryColorAccent: #fff;
+  $secondaryColor: invert($secondaryColor);
+  $tertiaryColor: invert($tertiaryColor);
+
+  $primaryFontColor: #eee;
+  $secondaryFontColor: invert($secondaryFontColor);
+  $primaryBackgroundColor: invert($primaryBackgroundColor);
+  $primaryBorderColor: invert($primaryBorderColor);
+
+  //Header Nav
+  $headerNavBgColor: invert($headerNavBgColor);
+  $headerNavLiBgColor: invert($headerNavLiBgColor);
+
+  //Menu
+  $menuBackgroundColor: invert(whitesmoke);
+}
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+@mixin itemBgColor($type) {
+  @if $colorMode == light {
+    @if $type == norm {
+      background-color: darken($primaryBackgroundColor, 1%);
+    } @else if $type == even {
+      background-color: lighten($primaryBackgroundColor, 3.5%);
+    } @else if $type == hover {
+      background-color: lighten($primaryBackgroundColor, 1%) !important;
+    }
+  }
+
+  @if $colorMode == dark {
+    @if $type == norm {
+      background-color: $primaryBackgroundColor;
+    } @else if $type == even {
+      background-color: lighten($primaryBackgroundColor, 1%);
+    } @else if $type == hover {
+      background-color: lighten($primaryBackgroundColor, 6%) !important;
+    }
+  }
+}
+
+@mixin letterHolderBgColor() {
+  @if $colorMode == dark {
+    background-color: lighten($primaryBackgroundColor, 15%);
+  } @else {
+    background-color: darken($primaryBackgroundColor, 20%);
+  }
+}
+
+//Color Map
+$colorMap: (
+  primary: (
+    $primaryColor,
+    #fff
+  ),
+  secondary: (
+    #5a5a5a,
+    #fff
+  ),
+  success: (
+    #4acf06,
+    #fff
+  ),
+  danger: (
+    #bd2130,
+    #fff
+  ),
+  warning: (
+    #f7cf02,
+    #212121
+  ),
+  info: (
+    #42d1f5,
+    #fff
+  ),
+  light: (
+    #dadada,
+    #212121
+  ),
+  dark: (
+    #1d2124,
+    #fff
+  )
+);

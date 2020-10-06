@@ -1,0 +1,25 @@
+// @for $i from 50 through 1000 {
+//   .grid-container-#{$i} {
+//     grid-template-columns: repeat(auto-fit, minmax(#{$i}px, 1fr));
+//   }
+//   $i: $i + 50;
+// }
+
+@for $i from 50 through 1000 {
+  .grid-container-#{$i} {
+    grid-template-columns: repeat(auto-fit, minmax(#{$i/16}rem, 1fr));
+  }
+  $i: $i + 50;
+}
+
+.grid-container {
+  width: 100%;
+  display: grid;
+  align-content: space-evenly;
+}
+
+@media only screen and (max-width: $mediaBreakPointSmall) {
+  .grid-container {
+    grid-template-columns: auto;
+  }
+}

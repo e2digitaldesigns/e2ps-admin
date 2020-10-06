@@ -1,0 +1,89 @@
+/////////////////////////////
+//SETTINGS///////////////////
+/////////////////////////////
+.right-nav-pill-content.right-nav-pill-content-settings {
+  height: calc(100% - 4rem);
+  width: calc(#{$rightSectionWidth} - 1rem);
+  h4 {
+    font-size: 1rem;
+    font-weight: 400;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid $primaryBorderColor;
+    margin: 0.625rem 0 0.3125rem 0;
+    clear: both;
+  }
+  ul.setting-list {
+    list-style: none;
+    padding-bottom: 1rem;
+    > li {
+      width: 100%;
+      border-top: 1px solid $primaryBorderColor;
+      padding: 0.625rem 0 0.9375rem 0.5rem;
+      color: $primaryFontColor;
+      font-size: 0.875rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      clear: both;
+      &:nth-child(even) {
+        @include itemBgColor("norm");
+      }
+      &:first-child {
+        border-top: 0;
+      }
+    }
+  }
+}
+
+.setting-list > li > span.switch-holder {
+  float: right;
+  padding: 0px 0.3125rem 0px 0;
+  > label.switch {
+    position: relative;
+    display: inline-block;
+    width: 2.8125rem;
+    height: 1.125rem;
+    input {
+      display: none;
+    }
+  }
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: darken($primaryColor, 18%);
+  transition: 0.4s;
+  border-radius: 3.75rem;
+
+  &:before {
+    position: absolute;
+    content: "";
+    height: 0.625rem;
+    width: 0.625rem;
+    left: 0.25rem;
+    bottom: 0.25rem;
+    background-color: rgba($primaryColorAccent, 0.5);
+    transition: 0.4s;
+    border-radius: 3.75rem;
+  }
+}
+
+input:checked + .slider {
+  background-color: darken($primaryColor, 0%);
+  &:before {
+    transform: translateX(1.6875rem);
+    background-color: $primaryColorAccent;
+  }
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 0.0625rem #000;
+}
+
+/////////////////////////////
+//SETTINGS///////////////////
+/////////////////////////////

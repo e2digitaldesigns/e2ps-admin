@@ -1,0 +1,37 @@
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.block {
+  width: 100%;
+}
+
+$directionMap: ('top', 'right', 'bottom', 'left');
+
+@for $index from 1 through length($directionMap) {
+  $borderDirection: nth($directionMap, $index);
+
+  $color: $headerNavLiBgColor;
+  $size: 0.0625rem;
+
+  .border-nav-#{$borderDirection} {
+    border-#{$borderDirection}: $size solid $color !important;
+  }
+}
+
+// @for $index from 1 through length($directionMap) {
+//   $value: nth($directionMap, $index);
+//   $name: $index - 1;
+
+//   .border-#{$value} {
+//     margin: 8rem;
+//   }
+// }

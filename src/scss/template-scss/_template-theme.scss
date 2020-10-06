@@ -1,0 +1,25 @@
+$topNavHeight: 3.75rem;
+$rightSectionWidth: 17.5rem;
+$rightSectionTabHeaderHeight: 2.1875rem;
+
+$bottomChyronHeight: 2.8125rem;
+$leftMenuWidth: 14.375rem;
+
+$mediaBreakPointSmall: 768px;
+$mediaBreakPointMedium: 1024px;
+
+$menuAnimationSpeed: 0.5s;
+
+//RESPONSIVE
+//////////////////////////////////////////
+@media screen and (max-width: $mediaBreakPointMedium) {
+  .hidden-md {
+    display: none;
+  }
+}
+
+@media screen and (max-width: $mediaBreakPointSmall) {
+  .hidden-sm {
+    display: none;
+  }
+}

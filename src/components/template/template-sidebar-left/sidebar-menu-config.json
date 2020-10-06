@@ -1,0 +1,56 @@
+[
+  {
+    "icon": "FaTachometerAlt",
+    "display": "Dashboard",
+    "uri": "/dashboard",
+    "subs": []
+  },
+  {
+    "icon": "FaTags",
+    "display": "Order Management",
+    "uri": "/order-management",
+    "subs": [
+      {
+        "display": "New Order",
+        "uri": "/order-management/new"
+      },
+      {
+        "display": "Orders",
+        "uri": "/order-management/listing"
+      },
+      {
+        "display": "Shopping Cart",
+        "uri": "/order-management/listing/?type=_shoppingCart"
+      },
+      {
+        "display": "Quote Request",
+        "uri": "/order-management/listing/?type=_quoteRequest"
+      },
+      {
+        "display": "Estimate",
+        "uri": "/order-management/listing/?type=_estimate"
+      }
+    ]
+  },
+  {
+    "icon": "FaUsers",
+    "display": "Client Management",
+    "uri": "/customer-management",
+    "subs": [
+      {
+        "display": "Client Listing",
+        "uri": "/customer-management/listing"
+      },
+      {
+        "display": "New Client",
+        "uri": "/customer-management/new"
+      }
+    ]
+  },
+  {
+    "icon": "FaUser",
+    "display": "My Profile",
+    "uri": "/dashboard",
+    "subs": []
+  }
+]

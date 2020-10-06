@@ -1,0 +1,8 @@
+.simplebar-scrollbar:before {
+  background-color: green !important;
+  background: darken($primaryColor, 10%) !important;
+}
+
+.simplebar-track.simplebar-vertical {
+  width: 8px !important;
+}

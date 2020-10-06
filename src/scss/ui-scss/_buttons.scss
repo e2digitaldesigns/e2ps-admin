@@ -1,0 +1,45 @@
+.btn {
+  font-size: 1em;
+}
+
+@each $name, $value in $colorMap {
+  $bgColor: nth($value, 1);
+  $fontColor: nth($value, 2);
+
+  .btn-#{$name} {
+    color: $fontColor;
+    border-color: $bgColor;
+    background-color: $bgColor;
+    &:hover {
+      background-color: darken($bgColor, 10%);
+    }
+    &.active,
+    &:active {
+      background-color: lighten($bgColor, 15%) !important;
+      border-color: lighten($bgColor, 15%) !important;
+    }
+  }
+
+  .btn-outline-#{$name} {
+    color: $bgColor;
+    border-color: $bgColor;
+    background-color: #fff;
+    &:hover {
+      color: $fontColor;
+      background-color: $bgColor;
+    }
+    &.active,
+    &:active {
+      background-color: #eee;
+      border-color: #eee;
+    }
+  }
+}
+
+.btn-square {
+  border-radius: 0px !important;
+}
+
+.btn-rounded {
+  border-radius: 1.5rem !important;
+}

@@ -1,0 +1,18 @@
+.order-list-img-holder {
+  float: right;
+  display: flex;
+  justify-content: flex-end;
+  width: 12.25rem;
+  .order-list-img {
+    width: 6rem;
+    height: 6rem;
+    background-color: greenyellow;
+    overflow: hidden;
+    &:first-child {
+      margin-right: 0.25rem;
+    }
+    img {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,122 @@
+.bottom-chyron {
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: $bottomChyronHeight;
+  box-sizing: border-box;
+  padding: 0.25rem $rightSectionWidth 0 $leftMenuWidth;
+  transition: padding $menuAnimationSpeed;
+  transition-timing-function: ease-out;
+}
+
+.wrapper.toggle-left-menu-hide .bottom-chyron {
+  padding-left: 0px;
+}
+
+.wrapper.toggle-right-menu-hide .bottom-chyron {
+  padding-right: 0px;
+}
+
+.bottom-chyron .news-scroller {
+  display: grid;
+  grid-template-columns: 3.75rem auto 3.125rem;
+  height: $bottomChyronHeight;
+  margin: 0 auto;
+  background-color: $secondaryColor;
+  border-top: 3px solid $primaryBackgroundColor;
+  > div.header {
+    grid-column: 1/2;
+    color: $primaryColorAccent;
+    text-transform: uppercase;
+    padding: 0.7rem 0.65rem 0 0.65rem;
+    font-size: 0.9rem;
+    background-color: $primaryColor;
+  }
+}
+
+.bottom-chyron .news-scroller > .scroller {
+  grid-column: 2/3;
+  overflow: hidden;
+  position: relative;
+
+  ul {
+    li {
+      height: 100%;
+      position: absolute;
+      top: -2.8125rem;
+      font-size: 0.9rem;
+      padding: 0.65rem 0.8rem 0 0.4rem;
+      text-overflow: ellipsis;
+      display: block;
+      overflow: hidden;
+      white-space: nowrap;
+      &:first-child {
+        top: 0.1rem;
+      }
+    }
+  }
+}
+
+.news-ticker-slide-in {
+  animation-name: ticker-slide-in;
+  animation-duration: 0.95s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.news-ticker-slide-out {
+  animation-name: ticker-slide-out;
+  animation-duration: 0.95s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes ticker-slide-in {
+  0% {
+    top: -2.8125rem;
+  }
+
+  100% {
+    top: 0.1rem;
+  }
+}
+
+@keyframes ticker-slide-out {
+  0% {
+    top: 0.1rem;
+  }
+
+  75% {
+    opacity: 0;
+  }
+
+  100% {
+    top: 2.8125rem;
+  }
+}
+
+.bottom-chyron .news-scroller > .scroll-page-up {
+  grid-column: 3/4;
+  font-size: 2.5em;
+  text-align: center;
+  border-left: 0.0625rem solid $primaryBorderColor;
+  background-color: darken($secondaryColor, 1%);
+  cursor: pointer;
+  .fa {
+    color: $primaryColor;
+    margin-top: -0.125rem;
+    display: block;
+  }
+  &:hover .fa {
+    color: lighten($primaryColor, 25%);
+  }
+}
+
+@media only screen and (max-width: $mediaBreakPointMedium) {
+  .bottom-chyron {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}

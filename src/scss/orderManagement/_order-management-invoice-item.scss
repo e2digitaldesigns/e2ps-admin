@@ -1,0 +1,313 @@
+///////////////////////////////////////
+// Invoice Item Bar ///////////////////
+///////////////////////////////////////
+
+.invoice-item-holder.invoice-item-bar > div.invoice-item-bar-div {
+  text-align: center;
+  height: 2rem;
+  @include defaultBorder('top');
+  &.header {
+    font-weight: 700;
+  }
+  &.invoice-item-bar-div-left {
+    @include defaultBorder('left');
+    padding-top: $invoicePadding;
+  }
+  &.invoice-item-bar-div-middle {
+    @include defaultBorder('right');
+    @include defaultBorder('left');
+    display: grid;
+    grid-template-columns: 5rem auto 5rem;
+    > div {
+      padding-top: $invoicePadding;
+    }
+    div:nth-child(2) {
+      @include defaultBorder('right');
+      @include defaultBorder('left');
+    }
+  }
+  &.invoice-item-bar-div-right {
+    @include defaultBorder('right');
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    > div {
+      padding-top: $invoicePadding;
+      @include defaultBorder('right');
+      &:last-child {
+        border-right: 0;
+      }
+    }
+  }
+}
+
+///////////////////////////////////////
+// Invoice Item Bar Ajax //////////////
+///////////////////////////////////////
+.invoice-item-holder.invoice-item-bar-ajax > div.invoice-item-bar-ajax-div {
+  text-align: center;
+  height: 2rem;
+  padding-top: $invoicePadding;
+  &.invoice-item-bar-ajax-right {
+    @include defaultBorder('right');
+  }
+  &.invoice-item-bar-ajax-middle {
+    display: grid;
+    grid-template-columns: auto 5rem;
+    padding-top: 0;
+    @include defaultBorder('right');
+    @include defaultBorder('left');
+    > div {
+      padding-top: $invoicePadding;
+    }
+    div:nth-child(1) {
+      padding-left: $invoicePadding;
+      text-align: left;
+      @include defaultBorder('right');
+    }
+    div:nth-child(2) {
+    }
+  }
+  &.invoice-item-bar-ajax-left {
+    @include defaultBorder('left');
+  }
+}
+
+///////////////////////////////////////
+// Invoice Item Div ///////////////////
+///////////////////////////////////////
+
+.invoice-item-holder > .invoice-item-div {
+  padding-top: $invoicePadding;
+  &.invoice-item-div-left {
+    text-align: center;
+    @include defaultBorder('left');
+  }
+  &.invoice-item-div-middle {
+    @include defaultBorder('right');
+    @include defaultBorder('left');
+    .customer-info {
+      width: 100%;
+      height: 10rem;
+      padding: 0.375rem 0.5rem;
+      @include defaultBorder('bottom');
+    }
+  }
+  &.invoice-item-div-right {
+    @include defaultBorder('right');
+  }
+  .invoice-label {
+    font-weight: 600;
+  }
+}
+
+///////////////////////////////////////
+// Invoice Item Images ////////////////
+///////////////////////////////////////
+$imageHolderColor: #fefefe;
+$optionWrapperHeight: 1.875rem;
+
+.invoice-list-ul .invoice-image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 0.625rem;
+  .order-image-wrapper {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-row-gap: 0.5rem;
+
+    > .image-wrapper {
+      position: relative;
+      > img {
+        width: 100%;
+        border: 0.25rem solid #eee;
+      }
+      > .progress-bar {
+        z-index: 100;
+        position: absolute;
+        bottom: $optionWrapperHeight;
+        height: 0.25rem;
+        width: 100%;
+        background-color: #eef0f3;
+        > .progress-bar-inner {
+          height: 100%;
+          background-color: $primaryColor;
+        }
+      }
+
+      > .options-wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        width: 100%;
+        height: $optionWrapperHeight;
+        background-color: #eee;
+        text-align: center;
+        align-items: center;
+        > span {
+          font-size: 1.25rem;
+          color: $primaryColor;
+          &:nth-child(2) {
+            border-right: 0.0625rem solid #bbb;
+            border-left: 0.0625rem solid #bbb;
+          }
+        }
+      }
+    }
+
+    > .drop-zone-wrapper {
+      .drop-zone-text {
+        display: grid;
+        width: 100%;
+        height: 3rem;
+        align-items: center;
+        text-align: center;
+        padding: 0.25rem;
+        background-color: #eee;
+        border-bottom: 0.0625rem solid #bbb;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $mediaBreakPointMedium) {
+  .invoice-item-holder {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .invoice-item-bar-div-left,
+  .invoice-item-bar-ajax-left,
+  .invoice-item-div-left {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: $mediaBreakPointSmall) {
+  .area1 {
+    grid-area: area1;
+  }
+
+  .area2 {
+    grid-area: area2;
+    div:first-child {
+      @include defaultBorder('left');
+    }
+  }
+
+  .area3 {
+    grid-area: area3;
+  }
+
+  .area4 {
+    grid-area: area4;
+    div:first-child {
+      @include defaultBorder('left');
+    }
+  }
+
+  .area5 {
+    grid-area: area5;
+    @include defaultBorder('bottom');
+  }
+
+  .area6 {
+    grid-area: area6;
+    @include defaultBorder('left');
+  }
+
+  .area7 {
+    grid-area: area7;
+    @include defaultBorder('bottom');
+  }
+
+  .area8 {
+    grid-area: area8;
+    @include defaultBorder('left');
+    @include defaultBorder('right');
+  }
+
+  .invoice-item-holder {
+    grid-template-columns: unset;
+    grid-template-areas:
+      'area1'
+      'area3'
+      'area2'
+      'area4'
+      'area5'
+      'area6'
+      'area7'
+      'area8';
+  }
+}
+
+///////////////////////////////////////
+// Invoice Options ////////////////////
+///////////////////////////////////////
+.invoice-option-link {
+  cursor: pointer;
+  color: $primaryColor;
+  &:hover {
+    text-decoration: underline;
+  }
+  &.invoice-option-link-active {
+  }
+}
+
+.formGroupRow {
+  margin-bottom: 0.25rem;
+}
+
+.invoice-selects {
+  width: 98%;
+  border: 0;
+}
+
+.active-staff-notes {
+  white-space: pre-wrap;
+}
+
+.staff-note-link {
+  cursor: pointer;
+  > .staff-notes-pre {
+    opacity: 0.9;
+    &.active-staff-notes-pre {
+      opacity: 0.4;
+    }
+  }
+}
+
+.editMenuClasser {
+  display: none;
+}
+
+.invoice-item-bar-loader {
+  &.invoice-item-bar-loader-show,
+  &.invoice-item-bar-loader-hide {
+    animation-name: show-loaders;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+  }
+
+  &.invoice-item-bar-loader-hide {
+    animation-name: hide-loaders;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+  }
+}
+
+@keyframes hide-loaders {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes show-loaders {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,56 @@
+// TABLE
+//////////////////////////////////////////
+.table {
+  thead th,
+  td,
+  th {
+    border-color: $primaryBorderColor;
+  }
+  color: $primaryFontColor;
+  &.table-bordered tbody tr {
+    th,
+    td {
+      border-color: $primaryBorderColor;
+    }
+  }
+  &.table-bordered-light {
+    border-bottom-color: $primaryBorderColor;
+    tbody tr {
+      th,
+      td {
+        border-top-color: $primaryBorderColor;
+      }
+    }
+  }
+  &.table-hover tbody tr {
+    &:hover {
+      color: $primaryFontColor;
+      @include itemBgColor("hover");
+    }
+  }
+  &.table-striped tbody tr:nth-child(odd) {
+    @include itemBgColor("even");
+  }
+}
+
+//CLIENT MANAGEMENT
+.table-title {
+  display: block;
+  clear: both;
+}
+
+tr td .table-options {
+  margin-top: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.75s;
+}
+
+tr:hover td .table-options {
+  opacity: 1;
+}
+
+@media only screen and (max-width: $mediaBreakPointMedium) {
+  tr td .table-options {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,5 @@
+@for $i from 6 through 48 {
+  .fs-#{$i} {
+    font-size: #{$i * 0.0625}rem;
+  }
+}

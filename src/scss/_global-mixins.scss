@@ -1,0 +1,21 @@
+@mixin defaultBorder($borderDirection) {
+  $color: $headerNavLiBgColor;
+  $size: 0.0625rem;
+
+  @if $borderDirection== 'all' {
+    border: $size solid $color;
+  } @else {
+    border-#{$borderDirection}: $size solid $color;
+  }
+}
+
+@mixin defaultNavBorder($borderDirection) {
+  $color: $headerNavLiBgColor;
+  $size: 0.0625rem;
+
+  @if $borderDirection== 'all' {
+    border: $size solid $color;
+  } @else {
+    border-nav-#{$borderDirection}: $size solid $color;
+  }
+}

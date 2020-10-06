@@ -1,0 +1,13 @@
+// CARDS
+//////////////////////////////////////////
+.card {
+  background-color: $secondaryColor;
+  border: 1px solid rgba(invert($secondaryColor), 0.125);
+  .card-header {
+    background-color: rgba(invert($secondaryColor), 0.03);
+    border-bottom: 1px solid rgba(invert($secondaryColor), 0.125);
+  }
+  .card-body {
+    background-color: $secondaryColor;
+  }
+}

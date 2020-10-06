@@ -1,0 +1,9 @@
+@each $name, $value in $colorMap {
+  $bgColor: nth($value, 1);
+  $fontColor: nth($value, 2);
+
+  .bg-#{$name} {
+    color: $fontColor !important;
+    background-color: $bgColor !important;
+  }
+}

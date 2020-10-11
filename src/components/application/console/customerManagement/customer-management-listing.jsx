@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { PageTemplateHeader } from '../../../template/template-main-content/template-main-content-assets';
@@ -28,22 +28,22 @@ export default (props) => {
   let pageSize = query.get('results') ? parseInt(query.get('results')) : 10;
 
   const [state, setState] = useState({
-    type: query.get('type') ? query.get('type') : '_compCart',
     currentPage: query.get('page') ? parseInt(query.get('page')) : 1,
     pageSize: query.get('results') ? parseInt(query.get('results')) : 10,
     domain: query.get('d') ? query.get('d') : '',
     filter: query.get('st') ? query.get('st') : '',
   });
 
-  const getState = useCallback(() => {
-    return state;
-  }, [state]);
-
   useEffect(() => {
     let stillHere = true;
 
     async function fetchData() {
-      let stating = await getState();
+      let stating = {
+        currentPage: 1,
+        pageSize: 10,
+        domain: '',
+        filter: '',
+      };
       try {
         const result = await dispatch(fetchCustomers(stating));
 
@@ -65,7 +65,7 @@ export default (props) => {
     return () => {
       stillHere = false;
     };
-  }, [dispatch, getState]);
+  }, [dispatch]);
 
   const storeFronts = {};
   for (let i = 0; i < stores.length; i++) {
@@ -143,10 +143,10 @@ export default (props) => {
   return (
     <>
       <PageTemplateHeader
-        displayName="Order Management"
+        displayName="Customer Management"
         button={{
-          text: 'New Order',
-          url: '/console/order-management/new',
+          text: 'New Customer',
+          url: '/console/customer-management/new',
         }}
       />
 

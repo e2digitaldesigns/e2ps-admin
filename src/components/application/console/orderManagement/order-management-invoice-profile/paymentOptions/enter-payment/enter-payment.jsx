@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -11,9 +11,11 @@ import {
   moneyFormatParser,
   moneyValidate,
 } from './../../../../_utils/';
-// import { invoicePayment } from './../../../../../../../redux/actions/invoices/invoiceActions';
+
+import { invoicePayment } from './../../../../../../../redux/actions/invoices/invoiceActions';
 
 export default () => {
+  const dispatch = useDispatch();
   const invoice = useSelector((state) => state.invoice.invoice);
   const invoiceTotals = invoiceAmountParser(invoice);
   const labelCol = 4,
@@ -90,6 +92,14 @@ export default () => {
       );
       return;
     }
+
+    const paymentObj = {
+      paymentGateway: 'enter',
+      ...paymentData,
+      customerId: invoice.customers._id,
+    };
+
+    await dispatch(invoicePayment(paymentObj));
   };
 
   const selectPrice = (m) => {

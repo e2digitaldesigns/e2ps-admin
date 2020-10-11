@@ -30,4 +30,4 @@ yarn-error.log*
 /_help
 /_help/helper.txt
 
-test.json
+.prettierrc.json

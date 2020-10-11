@@ -1,11 +1,5 @@
 [
   {
-    "icon": "FaTachometerAlt",
-    "display": "Dashboard",
-    "uri": "/dashboard",
-    "subs": []
-  },
-  {
     "icon": "FaTags",
     "display": "Order Management",
     "uri": "/order-management",

@@ -14,15 +14,15 @@ export default (props) => {
   const system = useSelector((state) => state.system);
   const account = useSelector((state) => state.account);
   const [state, setState] = useState({
-    emailAddress: 'spock@email.com',
-    password: '332310',
+    emailAddress: '',
+    password: '',
   });
 
   const [loginState, SetLoginState] = useState({ errorMessage: null });
 
   const [resetState, setResetState] = useState({
     isActive: false,
-    emailAddress: 'spock@email.com',
+    emailAddress: '',
   });
 
   const onChange = (e) => {

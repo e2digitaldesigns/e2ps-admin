@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -15,13 +15,15 @@ import {
   numberMaxValidate,
 } from './../../../../_utils/';
 
+import { invoicePayment } from './../../../../../../../redux/actions/invoices/invoiceActions';
+
 export default ({ paymentGateway }) => {
+  const dispatch = useDispatch();
   const invoice = useSelector((state) => state.invoice.invoice);
   const invoiceTotals = invoiceAmountParser(invoice);
 
   const labelCol = 4,
     fieldCol = 8;
-  // console.clear();
 
   const [creditCardState, setCreditCardState] = useState({
     paymentAmountType: 'invoice',
@@ -119,6 +121,14 @@ export default ({ paymentGateway }) => {
       );
       return;
     }
+
+    await dispatch(
+      invoicePayment({
+        ...paymentData,
+        paymentGateway,
+        customerId: invoice.customers._id,
+      }),
+    );
   };
 
   const selectPrice = (m) => {

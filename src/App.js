@@ -10,7 +10,6 @@ import { accountLoggedInRefresh } from './redux/actions/account/accountActions';
 import { fetchSystemInformation } from './redux/actions/system/systemActions';
 
 import Auth from './utils/authServices';
-import Home from './components/application/home/home';
 import Login from './components/application/login/login';
 import Logout from './components/application/login/logout';
 import passwordReset from './components/application/password-reset/password-reset';
@@ -65,8 +64,6 @@ const App = (props) => {
           <BrowserRouter>
             <Switch>
               <Auth.privateRoute path="/console" component={Console} />
-              <Route exact path="/test" component={Home} />
-              <Route exact path="/home" component={Home} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/logout" component={Logout} />
 

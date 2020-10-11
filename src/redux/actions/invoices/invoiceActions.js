@@ -2,7 +2,6 @@ import http from '../../../utils/httpServices';
 import * as actions from '../actionTypes';
 
 export const getInvoices = (formObj) => {
-  console.log(4, 'action', formObj);
   return async (dispatch) => {
     dispatch({ type: actions.GET_INVOICES_PENDING });
     try {
@@ -16,7 +15,7 @@ export const getInvoices = (formObj) => {
       dispatch({ type: actions.GET_INVOICES_SUCCESS, payload: data });
       return data;
     } catch (error) {
-      console.log(34, error);
+      console.error(18, error);
       dispatch({ type: actions.GET_INVOICES_FAILURE, payload: error });
     }
   };
@@ -34,15 +33,13 @@ export const getInvoiceById = (id) => {
       dispatch({ type: actions.GET_INVOICE_BY_ID_SUCCESS, payload: data });
       return data;
     } catch (error) {
-      console.log(34, error);
+      console.error(36, error);
       dispatch({ type: actions.GET_INVOICE_BY_ID_FAILURE, payload: error });
     }
   };
 };
 
 export const updateInvoiceSegmentById = (formData) => {
-  console.clear();
-  console.log(41, formData);
   return async (dispatch) => {
     dispatch({
       type: actions.UPDATE_INVOICE_ITEM_SEGMENT_BY_ID_PENDING,
@@ -68,7 +65,7 @@ export const updateInvoiceSegmentById = (formData) => {
 
       return data;
     } catch (error) {
-      console.log(62, error);
+      console.error(68, error);
       dispatch({
         type: actions.UPDATE_INVOICE_ITEM_SEGMENT_BY_ID_FAILURE,
         payload: error,
@@ -94,7 +91,7 @@ export const reOrderInvoiceItem = (formData) => {
       });
       return data;
     } catch (error) {
-      console.log(34, error);
+      console.error(94, error);
       dispatch({
         type: actions.RE_ORDER_INVOICE_ITEM_FAILURE,
         payload: error,
@@ -104,7 +101,6 @@ export const reOrderInvoiceItem = (formData) => {
 };
 
 export const deleteInvoiceItem = (formData) => {
-  console.log(formData);
   return async (dispatch) => {
     dispatch({ type: actions.DELETE_INVOICE_ITEM_PENDING });
     try {
@@ -124,7 +120,7 @@ export const deleteInvoiceItem = (formData) => {
       });
       return data;
     } catch (error) {
-      console.log(34, error);
+      console.error(123, error);
       dispatch({
         type: actions.DELETE_INVOICE_ITEM_FAILURE,
         payload: error,
@@ -135,7 +131,6 @@ export const deleteInvoiceItem = (formData) => {
 };
 
 export const deleteInvoice = (id) => {
-  console.log(128, id);
   return async (dispatch) => {
     dispatch({ type: actions.DELETE_INVOICE_PENDING });
     try {
@@ -150,7 +145,7 @@ export const deleteInvoice = (id) => {
       });
       return data;
     } catch (error) {
-      console.log(34, error);
+      console.error(148, error);
       dispatch({
         type: actions.DELETE_INVOICE_FAILURE,
         payload: error,
@@ -160,9 +155,6 @@ export const deleteInvoice = (id) => {
 };
 
 export const invoicePayment = (formData) => {
-  console.clear();
-  console.table(formData);
-
   return async (dispatch) => {
     dispatch({ type: actions.INVOICE_PAYMENT_PENDING });
 
@@ -177,15 +169,13 @@ export const invoicePayment = (formData) => {
         throw data.error;
       }
 
-      console.log(168, 'inv payment', data);
-
       dispatch({
         type: actions.INVOICE_PAYMENT_SUCCESS,
         payload: data.items,
       });
       return data;
     } catch (error) {
-      console.log(34, error);
+      console.error(182, error);
       dispatch({
         type: actions.INVOICE_PAYMENT_FAILURE,
         payload: error,
@@ -195,9 +185,6 @@ export const invoicePayment = (formData) => {
 };
 
 export const updateInvoicePart = (formData) => {
-  console.clear();
-  console.table(191, formData);
-
   return async (dispatch) => {
     dispatch({ type: actions.UPDATE_INVOICE_SEGMENT_PENDING });
 
@@ -219,7 +206,7 @@ export const updateInvoicePart = (formData) => {
       });
       return data;
     } catch (error) {
-      console.log(34, error);
+      console.error(211, error);
       dispatch({
         type: actions.UPDATE_INVOICE_SEGMENT_FAILURE,
         payload: error,
@@ -229,9 +216,6 @@ export const updateInvoicePart = (formData) => {
 };
 
 export const orderImageDelete = (formData) => {
-  console.clear();
-  console.table(191, formData);
-
   return async (dispatch) => {
     dispatch({ type: actions.ORDER_INVOICE_IMAGE_DELETE_PENDING });
 
@@ -250,7 +234,7 @@ export const orderImageDelete = (formData) => {
       });
       return data;
     } catch (error) {
-      console.log(34, error);
+      console.error(241, error);
       dispatch({
         type: actions.ORDER_INVOICE_IMAGE_DELETE_FAILURE,
         payload: error,

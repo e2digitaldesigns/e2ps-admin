@@ -59,22 +59,24 @@ export default () => {
   };
 
   let { currentPage, pageSize, domain, filter, dataSet } = state;
-  filter = filter.toLowerCase();
+  // filter = filter.toLowerCase();
 
-  let filtered = filter
-    ? dataSet.filter(
-        (f) =>
-          f.contact.companyName.toLowerCase().includes(filter) ||
-          f.contact.firstName.toLowerCase().includes(filter) ||
-          f.contact.lastName.toLowerCase().includes(filter) ||
-          f.contact.phone.toLowerCase().includes(filter) ||
-          f.contact.email.toLowerCase().includes(filter),
-      )
-    : dataSet;
+  // let filtered = filter
+  //   ? dataSet.filter(
+  //       (f) =>
+  //         f.contact.companyName.toLowerCase().includes(filter) ||
+  //         f.contact.firstName.toLowerCase().includes(filter) ||
+  //         f.contact.lastName.toLowerCase().includes(filter) ||
+  //         f.contact.phone.toLowerCase().includes(filter) ||
+  //         f.contact.email.toLowerCase().includes(filter),
+  //     )
+  //   : dataSet;
 
-  filtered = domain
-    ? filtered.filter((f) => f.storeFrontId === domain)
-    : filtered;
+  // filtered = domain
+  //   ? filtered.filter((f) => f.storeFrontId === domain)
+  //   : filtered;
+
+  filtered = dataSet;
 
   const count = filtered.length;
   const listing = Paginate(filtered, currentPage, pageSize);

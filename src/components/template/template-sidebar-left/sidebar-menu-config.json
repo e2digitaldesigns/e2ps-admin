@@ -10,7 +10,7 @@
       },
       {
         "display": "Orders",
-        "uri": "/order-management/listing"
+        "uri": "/order-management/listing/?type=_compCart"
       },
       {
         "display": "Shopping Cart",

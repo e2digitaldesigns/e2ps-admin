@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { PageTemplateHeader } from '../../../template/template-main-content/template-main-content-assets';
@@ -14,6 +14,7 @@ export default (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const searchTermRef = useRef();
+  const initState = useRef();
   const stores = useSelector((state) => state.system.storeFronts);
   const { listing, paginate } = useSelector((state) => state.invoice);
 
@@ -21,32 +22,34 @@ export default (props) => {
     docReady: false,
   });
 
-  function useQuery() {
-    return new URLSearchParams(useLocation().search);
-  }
+  const params = new URLSearchParams(useLocation().search);
+  const type = params.get('type');
 
-  const query = useQuery();
-  let pageSize = query.get('results') ? parseInt(query.get('results')) : 10;
+  initState.current = {
+    type: params.get('type'),
+    currentPage:
+      params.has('page') && params.get('page') !== ''
+        ? parseInt(params.get('page'))
+        : 1,
+    pageSize:
+      params.has('results') && params.get('results') !== ''
+        ? parseInt(params.get('results'))
+        : 10,
+    domain: params.has('d') ? params.get('d') : '',
+    filter: params.has('st') ? params.get('st') : '',
+  };
 
   const [state, setState] = useState({
-    type: query.get('type') ? query.get('type') : '_compCart',
-    currentPage: query.get('page') ? parseInt(query.get('page')) : 1,
-    pageSize: query.get('results') ? parseInt(query.get('results')) : 10,
-    domain: query.get('d') ? query.get('d') : '',
-    filter: query.get('st') ? query.get('st') : '',
+    ...initState.current,
   });
 
-  const getState = useCallback(() => {
-    return state;
-  }, [state]);
-
   useEffect(() => {
+    console.clear();
     let stillHere = true;
 
     async function fetchData() {
-      let stating = await getState();
       try {
-        const result = await dispatch(getInvoices(stating));
+        const result = await dispatch(getInvoices({ ...initState.current }));
 
         if (result.error.errorCode === '0x0' && stillHere) {
           setDocumentState((documentState) => ({
@@ -57,7 +60,7 @@ export default (props) => {
           throw result;
         }
       } catch (error) {
-        console.log(41, 'invoice listing', error);
+        console.log(68, 'invoice listing', error);
       }
     }
 
@@ -66,7 +69,7 @@ export default (props) => {
     return () => {
       stillHere = false;
     };
-  }, [dispatch, getState]);
+  }, [dispatch, initState, type]);
 
   const storeFronts = {};
   for (let i = 0; i < stores.length; i++) {
@@ -109,10 +112,11 @@ export default (props) => {
 
       await dispatch(getInvoices(searchObj));
 
-      const theLinker = `/console/order-management/listing?page=${page}&results=${thePageSize}&domain=${theDomain}&filter=${theFilter}`;
+      const theLinker = `/console/order-management/listing/?type=${type}&page=${page}&results=${thePageSize}&domain=${theDomain}&filter=${theFilter}`;
+
       history.push(theLinker);
     } catch (error) {
-      console.log(79, 'invoice listing', error);
+      console.error(119, 'invoice listing', error);
     }
   };
 
@@ -129,12 +133,14 @@ export default (props) => {
         ...searchTermRef.current,
         currentPage: 1,
       };
+
       await dispatch(getInvoices(searchObj));
 
-      const theLinker = `/console/order-management/listing?page=1&results=${searchObj.pageSize}&domain=${searchObj.domain}&filter=${searchObj.filter}`;
+      const theLinker = `/console/order-management/listing/?type=${type}&page=1&results=${searchObj.pageSize}&domain=${searchObj.domain}&filter=${searchObj.filter}`;
+
       history.push(theLinker);
     } catch (error) {
-      console.log(94, 'invoice listing', error);
+      console.error(143, 'invoice listing', error);
     }
   };
 
@@ -179,9 +185,11 @@ export default (props) => {
                 <td>
                   {m.invoice[0].invoiceId} - {m.orderId}
                   <br />
-                  <strong>{m.theItem.displayName}</strong> <br />
-                  <strong>Item Type:</strong> {m.itemType} <br />
-                  <strong>Job Name:</strong> {m.item.name}
+                  <strong>{m.customer[0].contact.companyName}</strong> <hr />
+                  {m.theItem.displayName}
+                  <br />
+                  Item Type: {m.itemType} <br />
+                  Job Name: {m.item.name}
                   <br />
                   <Link
                     to={`/console/order-management/invoice/${m.invoice[0]._id}`}
@@ -189,11 +197,7 @@ export default (props) => {
                     View Order
                   </Link>
                 </td>
-                <td className="hidden-sm">
-                  {m.orderDate}
-                  <br />
-                  {dateParser(m.orderDate, 'sm')}
-                </td>
+                <td className="hidden-sm">{dateParser(m.orderDate, 'sm')}</td>
                 <td>
                   <div className="order-list-img-holder">
                     {m.item.images.map((imgMap, imgIndex) => (
@@ -217,7 +221,9 @@ export default (props) => {
           itemsCount={paginate.totalResults}
           currentPage={paginate.currentPage}
           pageSize={
-            searchTermRef.current ? searchTermRef.current.pageSize : pageSize
+            searchTermRef.current
+              ? searchTermRef.current.pageSize
+              : initState.current.pageSize
           }
           onPageChange={handlePageChange}
         />

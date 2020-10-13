@@ -1,7 +1,7 @@
 @mixin sidebarLi() {
   width: 100%;
   min-height: 2.5rem;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   line-height: 2.5rem;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -85,7 +85,7 @@ ul.sidebar-left-list > li {
     }
   }
   > a.parent:after {
-    content: "";
+    content: '';
     width: 0;
     height: 0;
     border-style: solid;

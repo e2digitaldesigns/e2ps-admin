@@ -14,7 +14,7 @@ $customerInfoHeight: $separationHeight * 5;
 
 .invoice-holder,
 .invoice-item-holder {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   display: grid;
   grid-template-columns: $invoiceSectionOneSize 5fr 4fr;
   @include defaultBorder('bottom');
@@ -40,6 +40,13 @@ $customerInfoHeight: $separationHeight * 5;
     &.default {
       height: $separationHeight;
     }
+  }
+}
+
+.invoice-div-left,
+.invoice-item-div-left .invoice-list-ul {
+  li:last-child {
+    @include defaultBorder('bottom');
   }
 }
 

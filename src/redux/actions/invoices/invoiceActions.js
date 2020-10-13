@@ -6,7 +6,7 @@ export const getInvoices = (formObj) => {
     dispatch({ type: actions.GET_INVOICES_PENDING });
     try {
       const { data } = await http.get(
-        `invoices/listing?type=_compCart&page=${formObj.currentPage}&results=${formObj.pageSize}&filter=${formObj.filter}&domain=${formObj.domain}`,
+        `invoices/listing?type=${formObj.type}&page=${formObj.currentPage}&results=${formObj.pageSize}&filter=${formObj.filter}&domain=${formObj.domain}`,
       );
       if (data.error.errorCode !== '0x0') {
         throw data.error;

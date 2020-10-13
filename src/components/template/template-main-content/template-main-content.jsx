@@ -24,7 +24,6 @@ import SystemSettings from '../../application/console/systemManagement/system-se
 import Help from '../../application/console/help/help';
 
 export default () => {
-  // console.log(9, 'template-main-content.jsx');
   return (
     <>
       <div

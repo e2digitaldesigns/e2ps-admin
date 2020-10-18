@@ -10,10 +10,8 @@ const Auth = {
       jwtDecode(localStorage.getItem(process.env.REACT_APP_JWT_TOKEN));
       loggedIn = true;
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
-
-    console.log(16, 'loggedIn', loggedIn);
 
     return loggedIn;
   },

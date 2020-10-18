@@ -65,7 +65,7 @@ export default (props) => {
     return () => {
       stillHere = false;
     };
-  }, [dispatch]);
+  }, [dispatch, props.match.params.rand]);
 
   const storeFronts = {};
   for (let i = 0; i < stores.length; i++) {
@@ -108,10 +108,10 @@ export default (props) => {
 
       await dispatch(fetchCustomers(searchObj));
 
-      const theLinker = `/console/customer-management/listing?page=${page}&results=${thePageSize}&domain=${theDomain}&filter=${theFilter}`;
+      const theLinker = `/console/customer-management/listing/${props.match.params.rand}/?page=${page}&results=${thePageSize}&domain=${theDomain}&filter=${theFilter}`;
       history.push(theLinker);
     } catch (error) {
-      console.log(79, 'invoice listing', error);
+      console.error(79, 'invoice listing', error);
     }
   };
 
@@ -131,10 +131,10 @@ export default (props) => {
 
       await dispatch(fetchCustomers(searchObj));
 
-      const theLinker = `/console/customer-management/listing?page=1&results=${searchObj.pageSize}&domain=${searchObj.domain}&filter=${searchObj.filter}`;
+      const theLinker = `/console/customer-management/listing/${props.match.params.rand}/?page=1&results=${searchObj.pageSize}&domain=${searchObj.domain}&filter=${searchObj.filter}`;
       history.push(theLinker);
     } catch (error) {
-      console.log(94, 'invoice listing', error);
+      console.error(94, 'invoice listing', error);
     }
   };
 

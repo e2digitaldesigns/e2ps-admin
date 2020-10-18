@@ -14,8 +14,8 @@ import {
 } from '../../../../_utils';
 
 export default ({ menuState, orderId, assets }) => {
-  const currentProduct = useRef();
   const dispatch = useDispatch();
+  const currentOrderProductState = useRef();
   const asset = _.cloneDeep(assets);
   const product = asset.theItem;
   const labelCol = 4;
@@ -38,38 +38,39 @@ export default ({ menuState, orderId, assets }) => {
   });
 
   useEffect(() => {
-    if (_.isEqual(product, currentProduct.current)) return;
     let stillHere = true;
-    const selects = product.selections;
+    if (orderProductState.activeProductSizeId) return;
 
     const activeProductSize =
-      product.productSizes[selects.activeProductSizeIndex];
+      product.productSizes[product.selections.activeProductSizeIndex];
 
     const activeProductQuantity =
-      activeProductSize.quantities[selects.activeProductQuantityIndex];
+      activeProductSize.quantities[
+        product.selections.activeProductQuantityIndex
+      ];
 
     setOrderProductState((orderProductState) => ({
       ...orderProductState,
       activeProductSizeId: activeProductSize._id,
       activeProductQuantityId: activeProductQuantity._id,
-      activeProductSidesCode: selects.activeProductSidesCode,
-      activeProductSides: selects.activeProductSides,
+      activeProductSidesCode: product.selections.activeProductSidesCode,
+      activeProductSides: product.selections.activeProductSides,
     }));
 
     if (stillHere) {
-      currentProduct.current = product;
       setState((state) => ({ ...state, docReady: true }));
     }
 
     return () => {
       stillHere = false;
     };
-  }, [product, currentProduct]);
+  }, [product, orderProductState]);
 
   useEffect(() => {
     let stillHere = true;
     if (!orderProductState.activeProductSizeId) return;
-    if (_.isEqual(product, currentProduct.current)) return;
+    if (_.isEqual(orderProductState, currentOrderProductState.current)) return;
+    currentOrderProductState.current = orderProductState;
 
     const obj = {
       itemType: 'design',
@@ -93,7 +94,7 @@ export default ({ menuState, orderId, assets }) => {
     return () => {
       stillHere = false;
     };
-  }, [product, currentProduct, orderProductState]);
+  }, [product, orderProductState, currentOrderProductState]);
 
   const handleFormChange = (e) => {
     setUpdateState({ ...updateState, [e.target.name]: e.target.value });

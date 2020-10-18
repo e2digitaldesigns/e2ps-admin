@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import uniqid from 'uniqid';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.css';
 
@@ -56,6 +57,10 @@ const linkage = () => {
   return;
 };
 
+const uriParser = (uri) => {
+  return uri.replace('{rand}', uniqid());
+};
+
 const TemplateSidebarLeft = (props) => {
   return (
     <div className="sidebar-left" data-test="template-sidebar-left">
@@ -72,7 +77,7 @@ const TemplateSidebarLeft = (props) => {
             >
               <NavLink
                 className={listItem.subs.length > 0 ? 'parent' : 'single'}
-                to={'/console' + listItem.uri}
+                to={'/console' + uriParser(listItem.uri)}
                 onClick={(e) =>
                   listItem.subs.length > 0
                     ? openToggle(e, index, listItem.subs)
@@ -89,7 +94,9 @@ const TemplateSidebarLeft = (props) => {
                 <ul>
                   {listItem.subs.map((sub) => (
                     <li key={sub.uri}>
-                      <Link to={'/console' + sub.uri}>{sub.display}</Link>
+                      <Link to={'/console' + uriParser(sub.uri)}>
+                        {sub.display}
+                      </Link>
                     </li>
                   ))}
                 </ul>

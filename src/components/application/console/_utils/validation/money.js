@@ -1,5 +1,3 @@
-console.clear();
-
 export default (number) => {
   const regExMatch = /[0-9]|[.]/g;
   const match = number.match(regExMatch);

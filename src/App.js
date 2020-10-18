@@ -16,7 +16,6 @@ import passwordReset from './components/application/password-reset/password-rese
 import Console from './components/application/console/console';
 
 const App = (props) => {
-  console.log(20, process.env.REACT_APP_REST_API);
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.account.loggedIn);
   const system = useSelector((state) => state.system);

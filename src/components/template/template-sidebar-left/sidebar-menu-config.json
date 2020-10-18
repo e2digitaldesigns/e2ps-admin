@@ -6,23 +6,23 @@
     "subs": [
       {
         "display": "New Order",
-        "uri": "/order-management/new"
+        "uri": "/order-management/new/{rand}"
       },
       {
         "display": "Orders",
-        "uri": "/order-management/listing/?type=_compCart"
+        "uri": "/order-management/listing/{rand}/?type=_compCart"
       },
       {
         "display": "Shopping Cart",
-        "uri": "/order-management/listing/?type=_shoppingCart"
+        "uri": "/order-management/listing/{rand}/?type=_shoppingCart"
       },
       {
         "display": "Quote Request",
-        "uri": "/order-management/listing/?type=_quoteRequest"
+        "uri": "/order-management/listing/{rand}/?type=_quoteRequest"
       },
       {
         "display": "Estimate",
-        "uri": "/order-management/listing/?type=_estimate"
+        "uri": "/order-management/listing/{rand}/?type=_estimate"
       }
     ]
   },
@@ -33,11 +33,11 @@
     "subs": [
       {
         "display": "Client Listing",
-        "uri": "/customer-management/listing"
+        "uri": "/customer-management/listing/{rand}"
       },
       {
         "display": "New Client",
-        "uri": "/customer-management/new"
+        "uri": "/customer-management/new/{rand}"
       }
     ]
   },

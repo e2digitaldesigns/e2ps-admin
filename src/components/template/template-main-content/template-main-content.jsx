@@ -39,7 +39,7 @@ export default () => {
 
           <Route
             exact
-            path="/console/order-management/new"
+            path="/console/order-management/new/:rand"
             component={OrderManagementNew}
           />
 
@@ -51,7 +51,7 @@ export default () => {
 
           <Route
             exact
-            path="/console/order-management/listing"
+            path="/console/order-management/listing/:rand"
             component={OrderManagementListing}
           />
 
@@ -63,13 +63,13 @@ export default () => {
 
           <Route
             exact
-            path="/console/customer-management/listing"
+            path="/console/customer-management/listing/:rand"
             component={CustomerManagementListing}
           />
 
           <Route
             exact
-            path="/console/customer-management/new"
+            path="/console/customer-management/new/:rand"
             component={CustomerManagementNew}
           />
 

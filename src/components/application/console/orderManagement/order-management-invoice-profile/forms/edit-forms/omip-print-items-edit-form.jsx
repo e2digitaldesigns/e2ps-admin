@@ -18,7 +18,7 @@ import {
 
 export default ({ menuState, orderId, assets }) => {
   const dispatch = useDispatch();
-  const currentProduct = useRef();
+  const currentOrderProductState = useRef();
   const asset = _.cloneDeep(assets);
   const product = asset.theItem;
   const labelCol = 4;
@@ -43,40 +43,39 @@ export default ({ menuState, orderId, assets }) => {
   });
 
   useEffect(() => {
-    if (_.isEqual(product, currentProduct.current)) return;
     let stillHere = true;
-
-    const selects = product.selections;
+    if (orderProductState.activeProductSizeId) return;
 
     const activeProductSize =
-      product.productSizes[selects.activeProductSizeIndex];
+      product.productSizes[product.selections.activeProductSizeIndex];
 
     const activeProductQuantity =
-      activeProductSize.quantities[selects.activeProductQuantityIndex];
+      activeProductSize.quantities[
+        product.selections.activeProductQuantityIndex
+      ];
 
     setOrderProductState((orderProductState) => ({
-      ...orderProductState,
       activeProductSizeId: activeProductSize._id,
       activeProductQuantityId: activeProductQuantity._id,
-      activeProductSidesCode: selects.activeProductSidesCode,
-      activeProductSides: selects.activeProductSides,
-      selectedAttributes: selects.selectedAttributes,
+      activeProductSidesCode: product.selections.activeProductSidesCode,
+      activeProductSides: product.selections.activeProductSides,
+      selectedAttributes: product.selections.selectedAttributes,
     }));
 
     if (stillHere) {
-      currentProduct.current = product;
       setState((state) => ({ ...state, docReady: true }));
     }
 
     return () => {
       stillHere = false;
     };
-  }, [product, currentProduct]);
+  }, [product, orderProductState]);
 
   useEffect(() => {
     let stillHere = true;
     if (!orderProductState.activeProductSizeId) return;
-    if (_.isEqual(product, currentProduct.current)) return;
+    if (_.isEqual(orderProductState, currentOrderProductState.current)) return;
+    currentOrderProductState.current = orderProductState;
 
     const obj = {
       itemType: 'print',
@@ -103,7 +102,7 @@ export default ({ menuState, orderId, assets }) => {
     return () => {
       stillHere = false;
     };
-  }, [product, currentProduct, orderProductState]);
+  }, [product, orderProductState, currentOrderProductState]);
 
   const handleChangeSize = (e) => {
     const activeProductSizeId = e.target.value;

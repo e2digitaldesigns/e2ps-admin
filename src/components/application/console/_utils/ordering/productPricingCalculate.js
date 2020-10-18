@@ -1,8 +1,10 @@
-import _ from "lodash";
+import _ from 'lodash';
 
-export default (productState, stateType = "new") => {
+export default (productState, stateType = 'new') => {
   // console.clear();
   const state = _.cloneDeep(productState);
+
+  console.log(7, state);
 
   let thisAttrPrice,
     thisAttrDays,
@@ -13,7 +15,7 @@ export default (productState, stateType = "new") => {
 
   //////////////////////////////////////////////////
   const size =
-    stateType === "new"
+    stateType === 'new'
       ? state.listing[state.activeProductIndex].productSizes[
           state.activeProductSizeIndex
         ]
@@ -21,12 +23,12 @@ export default (productState, stateType = "new") => {
 
   //////////////////////////////////////////////////
 
-  if (state.itemType === "design") {
+  if (state.itemType === 'design') {
     return {
       basePrice: 0,
       attributePrice: 0,
       itemPrice:
-        state.activeProductSides === "1"
+        state.activeProductSides === '1'
           ? parseFloat(size.designPrice1)
           : parseFloat(size.designPrice2),
       turnTime: 0,
@@ -36,18 +38,18 @@ export default (productState, stateType = "new") => {
 
   //////////////////////////////////////////////////
   const quantities =
-    stateType === "new"
+    stateType === 'new'
       ? size.quantities[state.activeProductQuantityIndex]
       : size.quantities.find((f) => f._id === state.activeProductQuantityId);
   //////////////////////////////////////////////////
 
   const basePrice =
-    state.activeProductSides === "2" ? quantities.price2 : quantities.price1;
+    state.activeProductSides === '2' ? quantities.price2 : quantities.price1;
   const quantity = quantities.quantity;
 
   //////////////////////////////////////////////////
   const attributes =
-    stateType === "new"
+    stateType === 'new'
       ? state.listing[state.activeProductIndex].attributes
       : state.attributes;
   //////////////////////////////////////////////////
@@ -56,14 +58,14 @@ export default (productState, stateType = "new") => {
   for (let i = 0; i < attributes.length; i++) {
     selectedOptionIndex = state.selectedAttributes[i].optionIndex;
 
-    if (attributes[i].type !== "1") {
+    if (attributes[i].type !== '1') {
       thisOption = attributes[i].options[selectedOptionIndex];
     }
 
     // console.log("xxxxxxxxxxxxxxxxxxxx", attributes[i]);
 
     switch (attributes[i].type) {
-      case "0":
+      case '0':
         thisAttrPrice = (parseFloat(thisOption.price) / 100) * basePrice;
         thisAttrDays = parseFloat(thisOption.days);
 
@@ -74,8 +76,8 @@ export default (productState, stateType = "new") => {
         }
         break;
 
-      case "1":
-        if (selectedOptionIndex === "1") {
+      case '1':
+        if (selectedOptionIndex === '1') {
           thisOption = attributes[i].options[0];
           temp[0] = parseFloat(thisOption.minPrice);
           temp[1] =
@@ -87,24 +89,24 @@ export default (productState, stateType = "new") => {
         }
         break;
 
-      case "2":
+      case '2':
         thisAttrPrice =
           parseFloat(thisOption.setUpPrice) + parseFloat(thisOption.price);
         thisAttrDays = parseFloat(thisOption.days);
         break;
 
-      case "3":
+      case '3':
         thisAttrPrice =
           parseFloat(thisOption.price) * Math.ceil(quantity / 100);
         thisAttrDays = parseFloat(thisOption.days);
         break;
 
-      case "4":
+      case '4':
         thisAttrPrice = (parseFloat(thisOption.price) / 100) * basePrice;
         thisAttrDays = parseFloat(thisOption.days);
         break;
 
-      case "5":
+      case '5':
         temp[0] = parseFloat(thisOption.minPrice);
         temp[1] =
           parseFloat(thisOption.setUpPrice) +
@@ -134,7 +136,7 @@ export default (productState, stateType = "new") => {
 function calculateWeight(gsm, size, quantity) {
   const psm = gsm * 0.00220462;
   const psi = psm / 1550;
-  const dims = size.split("x");
+  const dims = size.split('x');
   const sqInches = parseFloat(dims[0]) * parseFloat(dims[1]);
   const weight = psi * sqInches * quantity;
   const theWeight = weight < 2 ? 2 : weight;

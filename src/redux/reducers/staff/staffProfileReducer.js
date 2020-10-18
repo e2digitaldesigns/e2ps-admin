@@ -16,7 +16,6 @@ const reducer = (
       return { ...state, pending: true };
 
     case actions.FETCH_STAFF_PROFILE_SUCCESS:
-      console.log(20, payload);
       return { ...state, pending: false, dataSet: payload.staffer };
 
     case actions.FETCH_STAFF_PROFILE_FAILURE:

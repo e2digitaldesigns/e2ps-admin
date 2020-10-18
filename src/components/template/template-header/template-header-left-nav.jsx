@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import uniqid from 'uniqid';
 import { handleLeftMenuToggle } from '../../../utils/templateGlobals';
 
 import {
@@ -25,7 +26,9 @@ export default () => {
         </li>
         <li className=" display-m branding">E2 Print Software</li>
         <li>
-          <Link to="/console/order-management/listing">
+          <Link
+            to={`/console/order-management/listing/${uniqid()}/?type=_compCart`}
+          >
             <i className="react-icon">
               <FaTags />
             </i>
@@ -33,7 +36,7 @@ export default () => {
           </Link>
         </li>
         <li>
-          <Link to="/console/order-management/new">
+          <Link to={`/console/order-management/new/${uniqid()}`}>
             <i className="react-icon">
               <FaPlusCircle />
             </i>
@@ -41,7 +44,7 @@ export default () => {
           </Link>
         </li>
         <li>
-          <Link to="/console/customer-management/new">
+          <Link to={`/console/customer-management/new/${uniqid()}`}>
             <i className="react-icon">
               <FaUser />
             </i>

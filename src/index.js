@@ -9,8 +9,6 @@ import './scss/styles.scss';
 
 import App from './App';
 
-console.log(process.env.REACT_APP_REST_API);
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

@@ -18,6 +18,8 @@ export default (props) => {
   const stores = useSelector((state) => state.system.storeFronts);
   const { listing, paginate } = useSelector((state) => state.invoice);
 
+  console.log(21, props.match.params.rand);
+
   const [documentState, setDocumentState] = useState({
     docReady: false,
   });
@@ -69,7 +71,7 @@ export default (props) => {
     return () => {
       stillHere = false;
     };
-  }, [dispatch, initState, type]);
+  }, [dispatch, initState, type, props.match.params.rand]);
 
   const storeFronts = {};
   for (let i = 0; i < stores.length; i++) {
@@ -94,9 +96,9 @@ export default (props) => {
     setState({ ...state, currentPage: page });
 
     try {
-      let thePageSize = '',
-        theDomain = '',
-        theFilter = '';
+      let thePageSize = initState.current.pageSize,
+        theDomain = initState.current.domain,
+        theFilter = initState.current.filter;
 
       if (searchTermRef.current) {
         thePageSize = searchTermRef.current.pageSize;
@@ -112,7 +114,7 @@ export default (props) => {
 
       await dispatch(getInvoices(searchObj));
 
-      const theLinker = `/console/order-management/listing/?type=${type}&page=${page}&results=${thePageSize}&domain=${theDomain}&filter=${theFilter}`;
+      const theLinker = `/console/order-management/listing/${props.match.params.rand}/?type=${type}&page=${page}&results=${thePageSize}&domain=${theDomain}&filter=${theFilter}`;
 
       history.push(theLinker);
     } catch (error) {
@@ -136,7 +138,7 @@ export default (props) => {
 
       await dispatch(getInvoices(searchObj));
 
-      const theLinker = `/console/order-management/listing/?type=${type}&page=1&results=${searchObj.pageSize}&domain=${searchObj.domain}&filter=${searchObj.filter}`;
+      const theLinker = `/console/order-management/listing/${props.match.params.rand}/?type=${type}&page=1&results=${searchObj.pageSize}&domain=${searchObj.domain}&filter=${searchObj.filter}`;
 
       history.push(theLinker);
     } catch (error) {

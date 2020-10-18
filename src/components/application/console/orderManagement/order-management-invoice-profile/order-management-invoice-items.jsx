@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import _ from 'lodash';
 import { slideDown, slideUp, isVisible } from 'slide-anim';
+
 // import { slideDown, slideUp, slideStop, isVisible } from 'slide-anim';
 import Card from 'react-bootstrap/Card';
 
@@ -33,6 +34,7 @@ import {
 } from './../../../../../redux/actions/invoices/invoiceActions';
 
 import loadingImage from '../../../../../imaging/loading-squares.gif';
+import http from './../../../../../utils/httpServices';
 
 export default ({ orderId }) => {
   const history = useHistory();
@@ -119,7 +121,7 @@ export default ({ orderId }) => {
 
     if (result.error && result.error.errorCode === '0x0') {
       if (result.theReturn === 'invoice-list') {
-        history.replace(`/console/order-management/listing`);
+        history.replace(`/console/order-management/listing/r/?type=_compCart`);
       }
     }
   };
@@ -150,6 +152,20 @@ export default ({ orderId }) => {
         ...invoiceInformation,
         [name]: !invoiceInformation[name],
       });
+    }
+  };
+
+  const handleEmailInvoice = async (e) => {
+    e.preventDefault();
+    console.log('send inv');
+    console.log(159, invoice);
+
+    try {
+      const result = await http.put(`/invoices/send`, { id: invoice._id });
+
+      console.log(result);
+    } catch (error) {
+      console.error('error', error);
     }
   };
 
@@ -244,7 +260,10 @@ export default ({ orderId }) => {
             <ul className="invoice-list-ul normalize">
               <li className="default">
                 <span className="invoice-label">Invoice:</span>{' '}
-                {invoice.invoiceId} | Email Invoice
+                {invoice.invoiceId} |{' '}
+                <a href="/#" onClick={(e) => handleEmailInvoice(e)}>
+                  Email Invoice
+                </a>
               </li>
               <li>
                 <span className="invoice-label">Item:</span>{' '}

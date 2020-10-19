@@ -28,8 +28,10 @@ const App = (props) => {
         if (result.error.errorCode !== '0x0') {
           throw result;
         }
+
+        document.title = `${result.defaultStoreFrontName} Administrative Control Panel`;
       } catch (err) {
-        console.log('System Error', err);
+        console.error('System Error', err);
       }
     }
 
@@ -44,7 +46,7 @@ const App = (props) => {
         );
         await dispatch(accountLoggedInRefresh({ status: true, ...data }));
       } catch (error) {
-        console.log('Login Error', error);
+        console.error('Login Error', error);
       }
     }
 

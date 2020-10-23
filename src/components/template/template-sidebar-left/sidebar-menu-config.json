@@ -44,7 +44,7 @@
   {
     "icon": "FaUser",
     "display": "My Profile",
-    "uri": "/dashboard",
+    "uri": "/my-profile",
     "subs": []
   }
 ]

@@ -8,6 +8,7 @@ import PaginationUI, { SearchFilter } from '../../../../utils/forms';
 import CustomerManagmentListingOptions from './customer-management-listing-options';
 import { fetchCustomers } from '../../../../redux/actions/customers/customerListingActions';
 import LoadingPage from '../_utils/_loading/loading';
+import uniqid from 'uniqid';
 
 export default (props) => {
   const history = useHistory();
@@ -146,7 +147,7 @@ export default (props) => {
         displayName="Customer Management"
         button={{
           text: 'New Customer',
-          url: '/console/customer-management/new',
+          url: `/console/customer-management/new/${uniqid()}`,
         }}
       />
 

@@ -23,7 +23,7 @@ export default () => {
   let autocomplete;
 
   const [customerState, setCustomerState] = useState({
-    _id: '5f5d5e1b1288ac04a0d8b501',
+    _id: '',
     isActive: false,
     storeFrontId: '',
     companyName: '',

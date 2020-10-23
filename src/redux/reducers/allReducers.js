@@ -19,8 +19,11 @@ import staffProfileReducer from './staff/staffProfileReducer';
 import supplierListingReducer from './suppliers/supplierListingReducer';
 import supplierProfileReducer from './suppliers/supplierProfileReducer';
 
+import myProfileReducer from './profile/profileReducer';
+
 const allReducers = combineReducers({
   system: systemReducer,
+  myProfile: myProfileReducer,
   account: accountReducer,
   customerListing: customerListingReducer,
   customerProfile: customerProfileReducer,

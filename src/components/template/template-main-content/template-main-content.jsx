@@ -21,6 +21,7 @@ import SuppliersManagementProfile from '../../application/console/suppliersManag
 
 import SystemSettings from '../../application/console/systemManagement/system-settings';
 
+import MyProfile from '../../application/console/profile/profile-main';
 import Help from '../../application/console/help/help';
 
 export default () => {
@@ -123,6 +124,8 @@ export default () => {
             path="/console/system-settings"
             component={SystemSettings}
           />
+
+          <Route exact path="/console/my-profile" component={MyProfile} />
 
           <Route exact path="/console/help" component={Help} />
         </Switch>

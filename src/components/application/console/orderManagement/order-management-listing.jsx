@@ -7,6 +7,7 @@ import Table from 'react-bootstrap/Table';
 import PaginationUI, { SearchFilter } from '../../../../utils/forms';
 import { getInvoices } from './../../../../redux/actions/invoices/invoiceActions';
 
+import uniqid from 'uniqid';
 import LoadingPage from '../_utils/_loading/loading';
 import { dateParser } from '../_utils';
 
@@ -17,8 +18,6 @@ export default (props) => {
   const initState = useRef();
   const stores = useSelector((state) => state.system.storeFronts);
   const { listing, paginate } = useSelector((state) => state.invoice);
-
-  console.log(21, props.match.params.rand);
 
   const [documentState, setDocumentState] = useState({
     docReady: false,
@@ -154,7 +153,7 @@ export default (props) => {
         displayName="Order Management"
         button={{
           text: 'New Order',
-          url: '/console/order-management/new',
+          url: `/console/order-management/new/${uniqid()}`,
         }}
       />
 
@@ -186,8 +185,13 @@ export default (props) => {
               <tr key={m._id} className="listingTable-tr">
                 <td>
                   {m.invoice[0].invoiceId} - {m.orderId}
-                  <br />
-                  <strong>{m.customer[0].contact.companyName}</strong> <hr />
+                  {m.customer[0] && m.customer[0].contact && (
+                    <>
+                      <br />
+                      <strong>{m.customer[0].contact.companyName}</strong>
+                    </>
+                  )}
+                  <hr />
                   {m.theItem.displayName}
                   <br />
                   Item Type: {m.itemType} <br />

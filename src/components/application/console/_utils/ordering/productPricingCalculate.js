@@ -44,7 +44,9 @@ export default (productState, stateType = 'new') => {
   //////////////////////////////////////////////////
 
   const basePrice =
-    state.activeProductSides === '2' ? quantities.price2 : quantities.price1;
+    parseInt(state.activeProductSides) === 2
+      ? quantities.price2
+      : quantities.price1;
   const quantity = quantities.quantity;
 
   //////////////////////////////////////////////////
